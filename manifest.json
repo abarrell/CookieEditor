@@ -15,6 +15,7 @@
     "cookies",
     "http://*/*",
     "https://*/*",
-    "tabs"
+    "tabs",
+    "webNavigation"
   ]
 }
