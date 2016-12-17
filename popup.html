@@ -64,13 +64,14 @@
     </nav>
     
     <section>
-      <table class="table table-hover">
+      <table class="table table-hover" id="firstPartyCookieTable">
         <thead>
+        <h2 class="firstPartyCookies">First Party Cookies</h2>
           <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Name</th>
+            <th>Domain</th>
+            <th>Secure?</th>
+            <th>Expiration Date</th>
           </tr>
         </thead>
         <tbody>
@@ -79,17 +80,54 @@
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
+            <td><button><img src="trash.png" width="20"></button></td>
           </tr>
           <tr>
             <td>2</td>
             <td>Jacob</td>
             <td>Thornton</td>
             <td>@fat</td>
+            <td><button><img src="trash.png" width="20"></button></td>
           </tr>
           <tr>
             <td>3</td>
             <td colspan="2">Larry the Bird</td>
             <td>@twitter</td>
+            <td><button><img src="trash.png" width="20"></button></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-hover" id="thirdPartyCookieTable">
+        <thead>
+        <h2 class="thirdPartyCookies">Third Party Cookies</h2>
+          <tr>
+            <th>Name</th>
+            <th>Domain</th>
+            <th>Secure?</th>
+            <th>Expiration Date</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Dis my second party cookie</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td><button><img src="trash.png" width="20"></button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td><button><img src="trash.png" width="20"></button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+            <td><button><img src="trash.png" width="20"></button></td>
           </tr>
         </tbody>
       </table>

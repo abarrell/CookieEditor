@@ -10,6 +10,13 @@ body, section {			/* Change width and height to own preferences */
 	overflow-x: hidden;
 }
 
+h2:after
+{
+    content:' ';
+    display:block;
+    border:2px solid black;
+}
+
 /* Basic style tweaks */
 section { padding: 5px;}
 .navbar { margin-bottom: 2px; }
