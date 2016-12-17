@@ -22,10 +22,31 @@ chrome.tabs.query({
             }, function(additionalCookies) {
                 cookies = cookies.concat(additionalCookies);
                 if (++index === urls.length) {
-                    
+                	console.log(cookies)
+        			 cookies = removeDuplicates(cookies);
                     console.log(cookies);
                 }
             }); 
         }); 
     }); 
 }); 
+
+
+
+function removeDuplicates(cookies) {
+	var check = {};
+	var returnArr = []
+	var length = cookies.length;
+	for(i = 0; i < length; ++i){
+		if(cookies[i].value in check){
+			continue;
+		}
+		else {
+			check[cookies[i].value] = cookies[i];
+		}
+	}
+	for(item in check) {
+		returnArr.push(check[item])
+	}
+	return returnArr;
+}
