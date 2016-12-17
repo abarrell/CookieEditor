@@ -7,7 +7,8 @@ $(document).ready(function(){
 var showURL=function(url){
 	var parser = document.createElement('a');
 	parser.href = url;
-	getCookies(parser.hostname);
+	var domain=parser.hostname.replace(/^www\./,'');
+	getCookies(domain);
 };
 
 function getCookies(filter){
