@@ -55,22 +55,25 @@ function makeTable(cookies, id){
 	    newRow.insertCell(1).innerHTML= cookies[i-1].domain;
 	    newRow.insertCell(2).innerHTML= cookies[i-1].secure;
 	    newRow.insertCell(3).innerHTML= '<button value="Delete" id="button-'+i+'"><img src="trash.png" width="20"></button>';
+	    newRow.cells[3].setAttribute("id", i)
 	    newRow.cells[3].addEventListener('click', function(event){
 
 	    	console.log("FUCK YOU MIKE")
-	    	console.log(event.path[1].id)
+	    	//console.log(event.path[1].id)
 	    	var temp = event.path[1].id;
 	    	var rowNum = temp.substr(temp.length-1)
 	    	
-		    table.deleteRow(rowNum);
+		    
 
-		    for(e = 1; e <= table.rows.length; ++e) {
-		    	table.rows[e].setAttribute("id", e);
-		    	table.rows[e].cells[3].setAttribute("id", "button-"+i)
+		    for(e = 1; e < table.rows.length; ++e) {
+
+		    	console.log(table.rows[e].cells[3].id)
+
+		    	if(table.rows[e].cells[3].id == rowNum){
+		    		table.deleteRow(e);
+		    	}
 
 		    }
-
-
 
 
 
