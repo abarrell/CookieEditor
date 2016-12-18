@@ -27,14 +27,13 @@ chrome.tabs.query({
                     chrome.tabs.getSelected(null, function (tab) {
   						var url = new URL(tab.url)
   						var domain = url.hostname
-                  		sdomain = domain.replace(/\./g, '');
-                		sdomain = sdomain.replace('www','')
+                  		sdomain = domain.split('.');
                   		console.log(sdomain)
 						firstP =[];
 						thirdP = [];
 						for( var i = 0; i < undupcookies.length; ++i){
-							var cd = undupcookies[i].domain.replace(/\./g, '')
-							if(cd != sdomain) {
+							var cd = undupcookies[i].domain.split('.')
+							if(cd[cd.length-2] != sdomain[sdomain.length-2]) {
 								thirdP.push(undupcookies[i]);
 							}
 							else{
