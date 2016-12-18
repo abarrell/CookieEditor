@@ -142,7 +142,7 @@ function makeTable(cookies, id){
 		    }
 		    else
 		    {
-		    	console.log(firstP[rowNum-1]);
+		    	console.log(thirdP[rowNum-1]);
 		    	if (thirdP[rowNum-1].httpOnly)
 		    	{
 		    		$('#myModalHttpOnly').modal('show');
