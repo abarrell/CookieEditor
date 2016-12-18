@@ -10,7 +10,7 @@
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["team19.js"]
+    "scripts": ["js/team19.js"]
   },
   "permissions": [
     "activeTab",
