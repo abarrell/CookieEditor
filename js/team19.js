@@ -22,11 +22,30 @@ chrome.tabs.query({
             }, function(additionalCookies) {
                 cookies = cookies.concat(additionalCookies);
                 if (++index === urls.length) {
-                	console.log(cookies)
-        			 cookies = removeDuplicates(cookies);
-                    console.log(cookies);
-                    makeTable(cookies, "firstPartyCookieTable");
-                    makeTable(cookies, "thirdPartyCookieTable");
+
+                	undupcookies = removeDuplicates(cookies);
+                    chrome.tabs.getSelected(null, function (tab) {
+  						var url = new URL(tab.url)
+  						var domain = url.hostname
+                  		sdomain = domain.replace(/\./g, '');
+                  		console.log(sdomain)
+						var firstP =[];
+						var thirdP = [];
+						for( var i = 0; i < undupcookies.length; ++i){
+							var cd = undupcookies[i].domain.replace(/\./g, '')
+							if(cd != sdomain) {
+								thirdP.push(undupcookies[i]);
+							}
+							else{
+								firstP.push(undupcookies[i])
+							}
+						}
+						console.log(firstP)
+						console.log(thirdP)
+						makeTable(firstP, "firstPartyCookieTable");
+                    	makeTable(thirdP, "thirdPartyCookieTable");
+				
+					});
 
                 }
             }); 
@@ -64,18 +83,26 @@ function makeTable(cookies, id){
 	    	var rowNum = temp.substr(temp.length-1)
 	    	
 		    
-
 		    for(e = 1; e < table.rows.length; ++e) {
 
 		    	console.log(table.rows[e].cells[3].id)
 
 		    	if(table.rows[e].cells[3].id == rowNum){
 		    		table.deleteRow(e);
+		    		rowNum = e;
 		    	}
 
 		    }
 
 
+		   	console.log(undupcookies)
+		    if(undupcookies[rowNum]){
+		    	var name = undupcookies[rowNum].name
+		    	var url = 'http://' + undupcookies[rowNum].domain.replace('.', '')
+		    	console.log(url)
+		    	console.log(name)
+		    	chrome.cookies.remove({'url': url,'name': name});
+		    }
 
 	    });
 
