@@ -87,48 +87,109 @@ function makeTable(cookies, id){
 	    newRow.insertCell(3).innerHTML= '<button value="Delete" id="button-'+i+'"><img src="trash.png" width="20"></button>';
 	    newRow.cells[3].setAttribute("id", i);
 	    newRow.cells[3].addEventListener('click', function(event){
-	    	$('#myModal').modal('show');
-	    	document.getElementById("yes").addEventListener("click", l1);	
-	    	//console.log(event.path[1].id)
-	    	if (deleting == 1)
-	    	{
-		    	var temp = event.path[1].id;
-		    	var rowNum = temp.substr(temp.length-1)
-		    	
-			    
-			    for(e = 1; e < table.rows.length; ++e) {
+	    	var temp = event.path[1].id;
+		    var rowNum = temp.substr(temp.length-1);
 
-			    	console.log(table.rows[e].cells[3].id)
+		    if(id == 'firstPartyCookieTable')
+		    {
+		    	console.log(firstP[rowNum-1]);
+		    	if (firstP[rowNum-1].httpOnly)
+		    	{
+		    		$('#myModalHttpOnly').modal('show');
+		    	}
+		    	else
+		    	{
+		    		$('#myModal').modal('show');
+			    	document.getElementById("yes").addEventListener("click", l1);	
+			    	//console.log(event.path[1].id)
+			    	if (deleting == 1)
+			    	{
+					    
+					    for(e = 1; e < table.rows.length; ++e) {
 
-			    	if(table.rows[e].cells[3].id == rowNum){
-			    		table.deleteRow(e);
-			    		rowNum = e;
-			    	}
+					    	console.log(table.rows[e].cells[3].id)
 
-			    }
+					    	if(table.rows[e].cells[3].id == rowNum){
+					    		table.deleteRow(e);
+					    		rowNum = e;
+					    	}
 
-			    if(id == 'firstPartyCookieTable'){
-			    	if(firstP[rowNum-1]){
-				    	var name = firstP[rowNum-1].name
-				    	var url = 'http://' + firstP[rowNum-1].domain.replace('.','')
-				  		firstP.splice(rowNum-1,1)
-				    	console.log(url)
-				    	console.log(name)
-				    	chrome.cookies.remove({'url': url,'name': name});
-				    }
-			    }
-			    else{
-			    	if(thirdP[rowNum-1]){
-				    	var name = thirdP[rowNum-1].name
-				    	var url = 'http://' + thirdP[rowNum-1].domain.replace('.','')
-				  		thirdP.splice(rowNum-1,1)
-				    	console.log(url)
-				    	console.log(name)
-				    	chrome.cookies.remove({'url': url,'name': name});
-				    }
-			    }
-			    deleting = 0;
-			}
+					    }
+
+					    if(id == 'firstPartyCookieTable'){
+					    	if(firstP[rowNum-1]){
+						    	var name = firstP[rowNum-1].name
+						    	var url = 'http://' + firstP[rowNum-1].domain.replace('.','')
+						  		firstP.splice(rowNum-1,1)
+						    	console.log(url)
+						    	console.log(name)
+						    	chrome.cookies.remove({'url': url,'name': name});
+						    }
+					    }
+					    else{
+					    	if(thirdP[rowNum-1]){
+						    	var name = thirdP[rowNum-1].name
+						    	var url = 'http://' + thirdP[rowNum-1].domain.replace('.','')
+						  		thirdP.splice(rowNum-1,1)
+						    	console.log(url)
+						    	console.log(name)
+						    	chrome.cookies.remove({'url': url,'name': name});
+						    }
+					    }
+					    deleting = 0;
+					}
+		    	}
+		    }
+		    else
+		    {
+		    	console.log(firstP[rowNum-1]);
+		    	if (thirdP[rowNum-1].httpOnly)
+		    	{
+		    		$('#myModalHttpOnly').modal('show');
+		    	}
+		    	else
+		    	{
+		    		$('#myModal').modal('show');
+			    	document.getElementById("yes").addEventListener("click", l1);	
+			    	//console.log(event.path[1].id)
+			    	if (deleting == 1)
+			    	{
+					    
+					    for(e = 1; e < table.rows.length; ++e) {
+
+					    	console.log(table.rows[e].cells[3].id)
+
+					    	if(table.rows[e].cells[3].id == rowNum){
+					    		table.deleteRow(e);
+					    		rowNum = e;
+					    	}
+
+					    }
+
+					    if(id == 'firstPartyCookieTable'){
+					    	if(firstP[rowNum-1]){
+						    	var name = firstP[rowNum-1].name
+						    	var url = 'http://' + firstP[rowNum-1].domain.replace('.','')
+						  		firstP.splice(rowNum-1,1)
+						    	console.log(url)
+						    	console.log(name)
+						    	chrome.cookies.remove({'url': url,'name': name});
+						    }
+					    }
+					    else{
+					    	if(thirdP[rowNum-1]){
+						    	var name = thirdP[rowNum-1].name
+						    	var url = 'http://' + thirdP[rowNum-1].domain.replace('.','')
+						  		thirdP.splice(rowNum-1,1)
+						    	console.log(url)
+						    	console.log(name)
+						    	chrome.cookies.remove({'url': url,'name': name});
+						    }
+					    }
+					    deleting = 0;
+					}
+		    	}
+		    }
 	    });
 
 	}
