@@ -52,6 +52,17 @@ chrome.tabs.query({
         }); 
     }); 
 }); 
+var deleting = 0;
+
+function l1()
+{
+	deleting = 1;
+}
+
+function l2()
+{
+	deleting = 0;
+}
 
 function makeTable(cookies, id){
 
@@ -74,46 +85,50 @@ function makeTable(cookies, id){
 	    newRow.insertCell(1).innerHTML= cookies[i-1].domain;
 	    newRow.insertCell(2).innerHTML= cookies[i-1].secure;
 	    newRow.insertCell(3).innerHTML= '<button value="Delete" id="button-'+i+'"><img src="trash.png" width="20"></button>';
-	    newRow.cells[3].setAttribute("id", i)
+	    newRow.cells[3].setAttribute("id", i);
 	    newRow.cells[3].addEventListener('click', function(event){
-
-	    	console.log("FUCK YOU MIKE")
+	    	$('#myModal').modal('show');
+	    	document.getElementById("yes").addEventListener("click", l1);	
 	    	//console.log(event.path[1].id)
-	    	var temp = event.path[1].id;
-	    	var rowNum = temp.substr(temp.length-1)
-	    	
-		    
-		    for(e = 1; e < table.rows.length; ++e) {
+	    	if (deleting == 1)
+	    	{
+		    	var temp = event.path[1].id;
+		    	var rowNum = temp.substr(temp.length-1)
+		    	
+			    
+			    for(e = 1; e < table.rows.length; ++e) {
 
-		    	console.log(table.rows[e].cells[3].id)
+			    	console.log(table.rows[e].cells[3].id)
 
-		    	if(table.rows[e].cells[3].id == rowNum){
-		    		table.deleteRow(e);
-		    		rowNum = e;
-		    	}
+			    	if(table.rows[e].cells[3].id == rowNum){
+			    		table.deleteRow(e);
+			    		rowNum = e;
+			    	}
 
-		    }
-
-		    if(id == 'firstPartyCookieTable'){
-		    	if(firstP[rowNum-1]){
-			    	var name = firstP[rowNum-1].name
-			    	var url = 'http://' + firstP[rowNum-1].domain.replace('.','')
-			  		firstP.splice(rowNum-1,1)
-			    	console.log(url)
-			    	console.log(name)
-			    	chrome.cookies.remove({'url': url,'name': name});
 			    }
-		    }
-		    else{
-		    	if(thirdP[rowNum-1]){
-			    	var name = thirdP[rowNum-1].name
-			    	var url = 'http://' + thirdP[rowNum-1].domain.replace('.','')
-			  		thirdP.splice(rowNum-1,1)
-			    	console.log(url)
-			    	console.log(name)
-			    	chrome.cookies.remove({'url': url,'name': name});
+
+			    if(id == 'firstPartyCookieTable'){
+			    	if(firstP[rowNum-1]){
+				    	var name = firstP[rowNum-1].name
+				    	var url = 'http://' + firstP[rowNum-1].domain.replace('.','')
+				  		firstP.splice(rowNum-1,1)
+				    	console.log(url)
+				    	console.log(name)
+				    	chrome.cookies.remove({'url': url,'name': name});
+				    }
 			    }
-		    }
+			    else{
+			    	if(thirdP[rowNum-1]){
+				    	var name = thirdP[rowNum-1].name
+				    	var url = 'http://' + thirdP[rowNum-1].domain.replace('.','')
+				  		thirdP.splice(rowNum-1,1)
+				    	console.log(url)
+				    	console.log(name)
+				    	chrome.cookies.remove({'url': url,'name': name});
+				    }
+			    }
+			    deleting = 0;
+			}
 	    });
 
 	}
