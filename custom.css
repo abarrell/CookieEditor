@@ -1,11 +1,13 @@
+
+
 /**
  * Chrome Extension Twitter Bootstrap 3 Template
  * Custom CSS
- *	
+ *this css template is courtesy of: https://github.com/Ehesp/Chrome-Extension-Twitter-Bootstrap-3-Template -->
  */
 
 body, section {			/* Change width and height to own preferences */
-	width: 600px;
+	width: 900px;
 	height: 800px;
 	overflow-x: hidden;
 }
